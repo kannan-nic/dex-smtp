@@ -8,11 +8,11 @@ web:
 
 connectors:
 - type: smtp
-  name: SMTP Example
-  id: smtp-example
+  name: SMTP Vigilfuoco
+  id: smtp-vigilfuoco
   config:
-    host: mail.example.com
-    domain: example.com
+    host: smtp-s.vigilfuoco.it:465
+    domain: vigilfuoco.it
 
 staticClients:
 - id: example-app

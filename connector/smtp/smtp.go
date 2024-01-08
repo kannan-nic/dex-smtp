@@ -25,13 +25,16 @@ func (sc *smtpConnector) Prompt() string {
 }
 
 func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username, password string) (id connector.Identity, valid bool, err error) {
+	
+	// Read config
+
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
 	if err != nil {
 		return
 	}
-	if p == "" {
-		sc.cfg.Host += ":465"
-	}
+	sc.cfg.Host = h + ":" + p
+
+	// Dial
 
 	var conn net.Conn
 
@@ -47,10 +50,15 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 		}
 	}
 
+	// Set client, defer quitting
+
 	cli, err := netsmtp.NewClient(conn, h)
+	defer cli.Quit()
 	if err != nil {
 		return
 	}
+
+	// Add and check domain
 
 	at := "@" + sc.cfg.Domain
 	if !strings.Contains(username, "@") {
@@ -62,6 +70,8 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 		err = nil
 		return
 	}
+
+	// Auth and check
 
 	auth := netsmtp.PlainAuth("", username, password, h)
 	err = cli.Auth(auth)
@@ -102,6 +112,7 @@ func (c *Config) Open(id string, logger log.Logger) (connector.Connector, error)
 		val  string
 	}{
 		{"host", c.Host},
+		{"domain", c.Domain},
 	}
 
 	for _, field := range requiredFields {
