@@ -21,7 +21,7 @@ type smtpConnector struct {
 }
 
 func (sc *smtpConnector) Prompt() string {
-	return ""
+	return sc.cfg.Label
 }
 
 func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username, password string) (id connector.Identity, valid bool, err error) {
@@ -104,6 +104,7 @@ type Config struct {
 	// The host and port of the SMTP server.
 	Host string `json:"host"`
 	Domain string `json:"domain"`
+	Label string `json:"label"`
 }
 
 func (c *Config) Open(id string, logger log.Logger) (connector.Connector, error) {
@@ -113,6 +114,7 @@ func (c *Config) Open(id string, logger log.Logger) (connector.Connector, error)
 	}{
 		{"host", c.Host},
 		{"domain", c.Domain},
+		{"label", c.Label},
 	}
 
 	for _, field := range requiredFields {

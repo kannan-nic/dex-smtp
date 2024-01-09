@@ -13,6 +13,7 @@ connectors:
   config:
     host: mail.example.com
     domain: example.com
+    label: Email
 
 staticClients:
 - id: example-app
