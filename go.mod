@@ -7,7 +7,7 @@ require (
 	github.com/AppsFlyer/go-sundheit v0.5.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/Masterminds/sprig/v3 v3.2.3
-	github.com/beevik/etree v1.2.0
+	github.com/beevik/etree v1.3.0
 	github.com/coreos/go-oidc/v3 v3.9.0
 	github.com/dexidp/dex/api/v2 v2.1.0
 	github.com/emersion/go-smtp v0.15.0
@@ -32,7 +32,7 @@ require (
 	github.com/stretchr/testify v1.8.4
 	go.etcd.io/etcd/client/pkg/v3 v3.5.11
 	go.etcd.io/etcd/client/v3 v3.5.11
-	golang.org/x/crypto v0.17.0
+	golang.org/x/crypto v0.18.0
 	golang.org/x/exp v0.0.0-20221004215720-b9f4876ce741
 	golang.org/x/net v0.19.0
 	golang.org/x/oauth2 v0.15.0
@@ -97,7 +97,7 @@ require (
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.17.0 // indirect
 	golang.org/x/mod v0.10.0 // indirect
-	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20231211222908-989df2bf70f3 // indirect
