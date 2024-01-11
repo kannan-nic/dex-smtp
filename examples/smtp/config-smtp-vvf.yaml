@@ -1,0 +1,23 @@
+issuer: http://127.0.0.1:5556/dex
+storage:
+  type: sqlite3
+  config:
+    file: examples/dex.db
+web:
+  http: 0.0.0.0:5556
+
+connectors:
+- type: smtp
+  name: Vigilfuoco
+  id: smtp-vigilfuoco
+  config:
+    host: smtp-s.vigilfuoco.it:465
+    domain: vigilfuoco.it
+    label: Username (nome.cognome)
+
+staticClients:
+- id: example-app
+  redirectURIs:
+  - 'http://127.0.0.1:5555/callback'
+  name: 'Example App'
+  secret: ZXhhbXBsZS1hcHAtc2VjcmV0

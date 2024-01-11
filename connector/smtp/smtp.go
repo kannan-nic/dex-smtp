@@ -58,17 +58,18 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 		return
 	}
 
-	// Add and check domain
+	// Check domain
 
-	at := "@" + sc.cfg.Domain
-	if !strings.Contains(username, "@") {
-		username = username + at
-	}
-	if !strings.HasSuffix(username, at) {
-		// username ends in something other than @$DOMAIN, so we reject it.
-		valid = false
-		err = nil
-		return
+	name, domain, found := strings.Cut(username, "@")
+	if found {
+		if domain != sc.cfg.Domain {
+			// username ends in something other than @$DOMAIN, so we reject it.
+			valid = false
+			err = nil
+			return
+		}
+	} else {
+		username += "@" + sc.cfg.Domain
 	}
 
 	// Auth and check
@@ -87,10 +88,12 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 		return
 	}
 
+	// Prepare id
+
 	id = connector.Identity{
 		UserID:            username,
-		Username:          username,
-		PreferredUsername: username,
+		Username:          name,
+		PreferredUsername: name,
 		Email:             username,
 		EmailVerified:     true,
 	}
