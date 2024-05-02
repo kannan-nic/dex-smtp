@@ -27,34 +27,39 @@ func (sc *smtpConnector) Prompt() string {
 func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username, password string) (id connector.Identity, valid bool, err error) {
 	
 	// Read config
-
+    ner = true
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
 	sc.cfg.Host = h + ":" + p
-	
+	if err != nil {
+		ner = false
+	}
 	// Dial
-
+	
 	var conn net.Conn
-		
-    if p == "" || p == "465" {
+	
+  	if p == "" {
+			p = 465
+		}
+    if p == "465" && ner {
 		conn, err = tls.Dial("tcp", sc.cfg.Host, nil)
 		if err != nil {
-			return
+			ner = false
 		}
 	} else {
 		conn, err = net.Dial("tcp", sc.cfg.Host)
 		if err != nil {
-			return
+			ner = false
 		}
 	}
 
 	// Set client, defer quitting
-
+	if ner {
 	cli, err := netsmtp.NewClient(conn, h)
 	defer cli.Quit()
 	if err != nil {
 		return
 	}
-
+	}
 	// Check domain
 
 	name, domain, found := strings.Cut(username, "@")
