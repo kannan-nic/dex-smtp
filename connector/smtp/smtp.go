@@ -37,15 +37,23 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 	// Dial
 
 	var conn net.Conn
-
-	if p == "" || p == "25" {
+	
+    if strings.Contains(p, "tls") {
 		
+		sc.cfg.Host = sc.cfg.Host[0 : len(sc.cfg.Host)-3]
+		p = p[0 : len(p)-3]
 		tlsconfig := &tls.Config {
         InsecureSkipVerify: true,
         ServerName: h,
     	}
 	 
 		conn, err = tls.Dial("tcp", sc.cfg.Host, tlsconfig)
+		if err != nil {
+			return
+		}
+	}
+	else if p == "" || p == "465" {
+		conn, err = tls.Dial("tcp", sc.cfg.Host, nil)
 		if err != nil {
 			return
 		}
