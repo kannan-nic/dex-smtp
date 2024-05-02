@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"io"
-	"io/ioutil"
+	"io"
 	"log"
 	"net"
 	"testing"
@@ -94,7 +94,7 @@ func (s *Session) Rcpt(to string) error {
 }
 
 func (s *Session) Data(r io.Reader) error {
-	if b, err := ioutil.ReadAll(r); err != nil {
+	if b, err := io.ReadAll(r); err != nil {
 		return err
 	} else {
 		log.Println("Data:", string(b))
