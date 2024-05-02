@@ -30,7 +30,7 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
 	if err != nil {
-		return
+		return nil, false, err
 	}
 	sc.cfg.Host = h + ":" + p
 	
