@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"net"
+	"log"
 	netsmtp "net/smtp"
 	"net/textproto"
 	"strings"
@@ -27,25 +28,25 @@ func (sc *smtpConnector) Prompt() string {
 func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username, password string) (id connector.Identity, valid bool, err error) {
 	
 	// Read config
-    ner := true
+	
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
 	sc.cfg.Host = h + ":" + p
 	if err != nil {
-		ner = false
+		log.Panic(err)
 	}
 	// Dial
 	
 	var conn net.Conn
 	
-    if (p == "" || p == "25") && ner {
+    if p == "" || p == "25" {
 		conn, err = tls.Dial("tcp", sc.cfg.Host, nil)
 		if err != nil {
-			ner = false
+			log.Panic(err)
 		}
 	} else {
 		conn, err = net.Dial("tcp", sc.cfg.Host)
 		if err != nil {
-			ner = false
+			log.Panic(err)
 		}
 	}
 
