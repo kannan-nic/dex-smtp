@@ -51,8 +51,7 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 		if err != nil {
 			return
 		}
-	}
-	else if p == "" || p == "465" {
+	} else if p == "" || p == "465" {
 		conn, err = tls.Dial("tcp", sc.cfg.Host, nil)
 		if err != nil {
 			return
