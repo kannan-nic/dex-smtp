@@ -30,7 +30,7 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
 	if err != nil {
-		return nil
+		return err
 	}
 	sc.cfg.Host = h + ":" + p
 	
@@ -41,12 +41,12 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
     if p == "" || p == "465" {
 		conn, err = tls.Dial("tcp", sc.cfg.Host, nil)
 		if err != nil {
-			return nil
+			return err
 		}
 	} else {
 		conn, err = net.Dial("tcp", sc.cfg.Host)
 		if err != nil {
-			return nil
+			return err
 		}
 	}
 
