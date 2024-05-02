@@ -24,19 +24,13 @@ func (sc *smtpConnector) Prompt() string {
 	return sc.cfg.Label
 }
 
-func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username, password string) (id connector.Identity, valid bool, err error) {
+func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username, password string) (*id connector.Identity, *valid bool, *err error) {
 	
 	// Read config
-id = connector.Identity{
-		UserID:            "Guest",
-		Username:          "Guest",
-		PreferredUsername: "Guest",
-		Email:             "Guest",
-		EmailVerified:     false,
-	}
+
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
 	if err != nil {
-		return id, false, err
+		return
 	}
 	sc.cfg.Host = h + ":" + p
 	
