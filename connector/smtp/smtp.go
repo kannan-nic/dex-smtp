@@ -27,17 +27,23 @@ func (sc *smtpConnector) Prompt() string {
 func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username, password string) (id connector.Identity, valid bool, err error) {
 	
 	// Read config
-
+id = connector.Identity{
+		UserID:            "Guest",
+		Username:          "Guest",
+		PreferredUsername: "Guest",
+		Email:             "Guest",
+		EmailVerified:     false,
+	}
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
 	if err != nil {
-		return nil, false, err
+		return id, false, err
 	}
 	sc.cfg.Host = h + ":" + p
 	
 	// Dial
 
 	var conn net.Conn
-	
+		
     if p == "" || p == "465" {
 		conn, err = tls.Dial("tcp", sc.cfg.Host, nil)
 		if err != nil {
