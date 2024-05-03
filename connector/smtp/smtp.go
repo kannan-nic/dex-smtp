@@ -16,7 +16,7 @@ import (
 var _ connector.PasswordConnector = &smtpConnector{}
 
 type smtpConnector struct {
-	logger log.Logger
+	log    log
 	cfg    Config
 }
 
@@ -123,5 +123,5 @@ func (c *Config) Open(id string, logger log.Logger) (connector.Connector, error)
 		}
 	}
 
-	return &smtpConnector{logger, *c}, nil
+	return &smtpConnector{log.Logger, *c}, nil
 }
