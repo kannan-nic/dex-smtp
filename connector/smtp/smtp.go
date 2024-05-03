@@ -8,7 +8,7 @@ import (
 	netsmtp "net/smtp"
 	"net/textproto"
 	"strings"
-
+    logs "log"
 	"github.com/dexidp/dex/connector"
 	"github.com/dexidp/dex/pkg/log"
 )
@@ -31,7 +31,7 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
 	sc.cfg.Host = h + ":" + p
 	if err != nil {
-		log.Panic(err)
+		logs.Panic(err)
 	}
 	// Dial
 	
@@ -40,12 +40,12 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
     if p == "" || p == "25" {
 		conn, err = tls.Dial("tcp", sc.cfg.Host, nil)
 		if err != nil {
-			log.Panic(err)
+			logs.Panic(err)
 		}
 	} else {
 		conn, err = net.Dial("tcp", sc.cfg.Host)
 		if err != nil {
-			log.Panic(err)
+			logs.Panic(err)
 		}
 	}
 
