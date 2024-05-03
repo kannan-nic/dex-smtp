@@ -32,6 +32,19 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 	if err != nil {
 		logs.Panic(err)
 	}
+	// Check domain
+
+	name, domain, found := strings.Cut(username, "@")
+	if found {
+		if domain != sc.cfg.Domain {
+			// username ends in something other than @$DOMAIN, so we reject it.
+			valid = false
+			err = nil
+			return id, valid, err
+		}
+	} else {
+		username += "@" + sc.cfg.Domain
+	}
 	// Prepare id
 
 	id = connector.Identity{
@@ -62,19 +75,6 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 	defer cli.Quit()
 	if err != nil {
 		logs.Panic(err)
-	}
-	// Check domain
-
-	name, domain, found := strings.Cut(username, "@")
-	if found {
-		if domain != sc.cfg.Domain {
-			// username ends in something other than @$DOMAIN, so we reject it.
-			valid = false
-			err = nil
-			return id, valid, err
-		}
-	} else {
-		username += "@" + sc.cfg.Domain
 	}
 
 	// Auth and check
