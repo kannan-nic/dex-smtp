@@ -2,6 +2,16 @@ run:
     timeout: 4m
     skip-dirs:
         - storage/ent/db # generated ent code
+issues:
+exclude:
+    - "foo"
+    - "bar"
+    - path: _test\.go
+      linters:
+        - gocyclo
+        - errcheck
+        - dupl
+        - gosec
 
 linters-settings:
     depguard:
@@ -14,7 +24,6 @@ linters-settings:
         local-prefixes: github.com/dexidp/dex
     goimports:
         local-prefixes: github.com/dexidp/dex
-
 
 linters:
     disable-all: true
@@ -35,7 +44,7 @@ linters:
         - ineffassign
         - misspell
         - nakedret
-        #- nolintlint
+        - nolintlint
         - prealloc
         # - revive
         # - sqlclosecheck
