@@ -25,7 +25,6 @@ func (sc *smtpConnector) Prompt() string {
 }
 
 func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username, password string) (id connector.Identity, valid bool, err error) {
-	
 	// Read config
 	
 	h, p, err := net.SplitHostPort(sc.cfg.Host)
@@ -53,7 +52,7 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 	cli, err := netsmtp.NewClient(conn, h)
 	defer cli.Quit()
 	if err != nil {
-		return
+		logs.Panic(err)
 	}
 	// Check domain
 
@@ -82,7 +81,7 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 		}
 	}
 	if err != nil {
-		return
+		logs.Panic(err)
 	}
 
 	// Prepare id
