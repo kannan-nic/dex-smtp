@@ -2,18 +2,6 @@ run:
     timeout: 4m
     skip-dirs:
         - storage/ent/db # generated ent code
-issues:
-exclude-use-default: false
-exclude:
-    - "foo"
-    - "bar"
-    - path: '(.+)_test\.go'
-      linters:
-        - gocyclo
-        - errcheck
-        - dupl
-        - gosec
-        - golint
 
 linters-settings:
     depguard:
@@ -27,6 +15,7 @@ linters-settings:
     goimports:
         local-prefixes: github.com/dexidp/dex
     exclude:
+      - path: '(.+)_test\.go'
       - Append
       - \.Wrapf
     # To enable/disable the asasalint builtin exclusions of function names.
