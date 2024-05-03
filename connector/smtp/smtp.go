@@ -5,7 +5,6 @@ import (
 	"crypto/tls"
 	"fmt"
 	"net"
-	"log"
 	netsmtp "net/smtp"
 	"net/textproto"
 	"strings"
