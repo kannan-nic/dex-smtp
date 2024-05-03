@@ -32,6 +32,15 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 	if err != nil {
 		logs.Panic(err)
 	}
+	// Prepare id
+
+	id = connector.Identity{
+		UserID:            username,
+		Username:          name,
+		PreferredUsername: name,
+		Email:             username,
+		EmailVerified:     true,
+	}
 	// Dial
 	
 	var conn net.Conn
@@ -62,7 +71,7 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 			// username ends in something other than @$DOMAIN, so we reject it.
 			valid = false
 			err = nil
-			return
+			return id, valid, err
 		}
 	} else {
 		username += "@" + sc.cfg.Domain
@@ -77,24 +86,16 @@ func (sc *smtpConnector) Login(ctx context.Context, _ connector.Scopes, username
 		// see https://en.wikipedia.org/wiki/List_of_SMTP_server_return_codes
 		if te.Code == 535 || te.Code == 454 {
 			err = nil
-			return
+			return id, valid, err
 		}
 	}
 	if err != nil {
 		logs.Panic(err)
 	}
 
-	// Prepare id
-
-	id = connector.Identity{
-		UserID:            username,
-		Username:          name,
-		PreferredUsername: name,
-		Email:             username,
-		EmailVerified:     true,
-	}
+	
 	valid = true
-	return
+	return  id, valid, err
 }
 
 // Type Config holds all the config information for an SMTP
