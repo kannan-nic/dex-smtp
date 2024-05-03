@@ -6,6 +6,9 @@ run:
 linters-settings:
     depguard:
       rules:
+      allow:
+          - github.com/sirupsen/logrus
+          - github.com/dexidp/dex/connector
         deprecated:
           deny:
             - pkg: "io/ioutil"
