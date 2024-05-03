@@ -6,12 +6,13 @@ issues:
 exclude:
     - "foo"
     - "bar"
-    - path: _test\.go
+    - path: '(.+)_test\.go'
       linters:
         - gocyclo
         - errcheck
         - dupl
         - gosec
+        - golint
 
 linters-settings:
     depguard:
