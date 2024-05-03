@@ -6,10 +6,11 @@ run:
 linters-settings:
     depguard:
       rules:
-      allow:
-          - github.com/sirupsen/logrus
-          - github.com/dexidp/dex/connector
-        deprecated:
+          main:
+            allow:
+                - github.com/sirupsen/logrus
+                - github.com/dexidp/dex/connector
+         deprecated:
           deny:
             - pkg: "io/ioutil"
               desc: "The 'io/ioutil' package is deprecated. Use corresponding 'os' or 'io' functions instead."
