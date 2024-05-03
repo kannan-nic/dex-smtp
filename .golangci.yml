@@ -24,6 +24,8 @@ linters-settings:
               desc: "The 'io/ioutil' package is deprecated. Use corresponding 'os' or 'io' functions instead."
     gci:
         local-prefixes: github.com/dexidp/dex
+        local-prefixes: github.com/dexidp/dex/connector
+        local-prefixes: github.com/sirupsen/logrus
     goimports:
         local-prefixes: github.com/dexidp/dex
 
@@ -103,10 +105,4 @@ linters:
         # - nestif
         # - testpackage
         # - wsl
-    gci:
-    sections:
-      - standard # Standard section: captures all standard packages.
-      - default # Default section: contains all imports that could not be matched to another section type.
-      - prefix(github.com/dexidp/dex/connector) # Custom section: groups all imports with the specified Prefix.
-    skip-generated: true # Skip generated files.
-    custom-order: true # Required for "sections" to take effect.
+    
