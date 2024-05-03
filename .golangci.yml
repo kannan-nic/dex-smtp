@@ -3,6 +3,7 @@ run:
     skip-dirs:
         - storage/ent/db # generated ent code
 issues:
+exclude-use-default: false
 exclude:
     - "foo"
     - "bar"
@@ -13,7 +14,7 @@ exclude:
         - dupl
         - gosec
         - golint
-
+issues.exclude-use-default
 linters-settings:
     depguard:
       rules:
