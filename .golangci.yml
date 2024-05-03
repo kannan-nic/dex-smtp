@@ -24,10 +24,18 @@ linters-settings:
               desc: "The 'io/ioutil' package is deprecated. Use corresponding 'os' or 'io' functions instead."
     gci:
         local-prefixes: github.com/dexidp/dex
-        local-prefixes: github.com/dexidp/dex/connector
-        local-prefixes: github.com/sirupsen/logrus
     goimports:
         local-prefixes: github.com/dexidp/dex
+    exclude:
+      - Append
+      - \.Wrapf
+    # To enable/disable the asasalint builtin exclusions of function names.
+    # See the default value of `exclude` to get the builtin exclusions.
+    # Default: true
+    use-builtin-exclusions: false
+    # Ignore *_test.go files.
+    # Default: false
+    ignore-test: true
 
 linters:
     disable-all: true
