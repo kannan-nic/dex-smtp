@@ -37,7 +37,10 @@ jobs:
       - name: Checkout repository
         #uses: actions/checkout@v3
         uses: docker/login-action@v3
-
+          with:
+        #  registry: ${{ env.REGISTRY }}
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN_DEXSMTP }}
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       #- name: Install cosign
@@ -57,10 +60,10 @@ jobs:
       #- name: Log into registry ${{ env.REGISTRY }}
       #  if: github.event_name != 'pull_request'
      #   uses: docker/login-action@v3 # v3.0.0
-        with:
+       # with:
         #  registry: ${{ env.REGISTRY }}
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN_DEXSMTP }}
+        #  username: ${{ env.DOCKER_USERNAME }}
+        #  password: ${{ secrets.DOCKERHUB_TOKEN_DEXSMTP }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
