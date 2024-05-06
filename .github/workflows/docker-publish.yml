@@ -39,7 +39,7 @@ jobs:
         uses: docker/login-action@v3
           with:
         #  registry: ${{ env.REGISTRY }}
-          username: ${{ env.DOCKER_USERNAME }}
+          Username: ${{ env.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN_DEXSMTP }}
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
