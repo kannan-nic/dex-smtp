@@ -10,10 +10,6 @@ linters-settings:
           deny:
             - pkg: "io/ioutil"
               desc: "The 'io/ioutil' package is deprecated. Use corresponding 'os' or 'io' functions instead."
-    gci:
-        local-prefixes: github.com/dexidp/dex
-    goimports:
-        local-prefixes: github.com/dexidp/dex 
   #        allow:
   #              - github.com/sirupsen/logrus
   #              - github.com/dexidp/dex/connector
