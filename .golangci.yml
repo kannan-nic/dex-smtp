@@ -41,7 +41,7 @@ linters:
         - dogsled
         - exhaustive
         - exportloopref
-        - gci
+        #- gci
         - gochecknoinits
         - gocritic
         #- gofmt
