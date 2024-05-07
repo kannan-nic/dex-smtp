@@ -41,12 +41,12 @@ linters:
         - dogsled
         - exhaustive
         - exportloopref
-        #- gci
+        - gci
         - gochecknoinits
         - gocritic
-        #- gofmt
-        #- gofumpt
-        #- goimports
+        - gofmt
+        - gofumpt
+        - goimports
         - goprintffuncname
         - gosimple
         - govet
