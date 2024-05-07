@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"gofmt/goimports"
 	"net"
 	netsmtp "net/smtp"
 	"net/textproto"
