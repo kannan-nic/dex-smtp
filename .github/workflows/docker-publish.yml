@@ -45,8 +45,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5 # v5.0.0
         with:
-          #images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          images: ghcr.io/ict-vvf-genova/dex-smtp
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          #images: ghcr.io/ict-vvf-genova/dex-smtp
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
