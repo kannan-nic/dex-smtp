@@ -9,7 +9,6 @@ import (
 	"testing"
 	"time"
 	
-	"github.com/daixiang0/gci"
 	"github.com/dexidp/dex/connector"
 	emsmtp "github.com/emersion/go-smtp"
 	"github.com/sirupsen/logrus"
