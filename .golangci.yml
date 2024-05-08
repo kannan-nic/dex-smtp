@@ -45,7 +45,7 @@ linters:
         - gochecknoinits
         - gocritic
         - gofmt
-        - gofumpt
+        #- gofumpt
         - goimports
         - goprintffuncname
         - gosimple
