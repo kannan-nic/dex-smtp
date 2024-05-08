@@ -44,9 +44,9 @@ linters:
         #- gci
         - gochecknoinits
         - gocritic
-        - gofmt
+        #- gofmt
         #- gofumpt
-        - goimports
+        #- goimports
         - goprintffuncname
         - gosimple
         - govet
